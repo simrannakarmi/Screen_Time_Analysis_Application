@@ -1,0 +1,182 @@
+#:kivy 2.1.0
+Interface:
+
+<Interface>:
+    canvas.before:
+        Color: 
+            rgba: 0,0,0,0
+        Rectangle:
+            pos:self.pos
+            size:self.size
+    ScreenManager:
+        id: sm
+        Screen:
+            name: "start_window"
+            BoxLayout:
+                orientation: "vertical"
+                size: root.width, root.height
+
+                padding: 50
+                spacing: 20
+
+                Label:
+                    id: title
+                    text: "Screen Time Analysis"
+                    font_name: "Comfortaa/Comfortaa_Regular.ttf"
+                    font_size: 44
+                    pos_hint: { 'center_x': 0.5,'center_y' : .8 }
+                    color: "aqua"
+
+                Button:
+                    id: startImage
+                    size_hint: .15, .12
+                    pos_hint: {'center_x': 0.5}
+                    background_color: 0,0,0,0
+
+                    on_press: 
+                        root.start_app()
+                        root.current = "timetrack_window"
+
+                    Image:
+                        source: 'startButton.png'
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+
+        Screen:
+            name: "timetrack_window"
+            size: root.width, root.height
+
+            BoxLayout:
+                orientation: "vertical"
+                BoxLayout:
+                    orientation: "vertical"      
+                    Label:
+                        text: "Screen Time Analysis"
+                        font_name: "Comfortaa/Comfortaa_Regular.ttf"
+                        font_size: 44
+                        color: 'aqua'
+                        halign: 'center'
+                        valign: 'center'
+                        pos_hint: { 'center_x' : .5,'center_y' : .8 }
+                    
+                    Label:
+                        text: "Application Started"
+                        font_name: "Comfortaa/Comfortaa_Regular.ttf"
+                        font_size: 18
+                        color: "aqua"
+                        pos_hint: { 'center_x' : .5,'center_y' : .2 }
+
+
+                BoxLayout:
+                    spacing: 40
+                    Button:
+                        id: start
+                        text: "Start"
+                        size_hint: (0.5, 0.2)   # This sets the button's size to half the width and 20% of the height of the parent widget
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        font_size: 20
+                        background_normal: ''
+                        background_color: (0, 0.6, 0.6, 1)
+                        color: (1, 1, 1, 1)
+                        border_radius: [20,]  
+                        border: (2,2,2,2)
+                        on_press: root.on_release()
+
+                    Button:
+                        id: stop
+                        text: 'Stop'
+                        size_hint: (0.5, 0.2)   # This sets the button's size to half the width and 20% of the height of the parent widget
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        font_size: 20
+                        background_normal: ''
+                        background_color: (0, 0.6, 0.6, 1)
+                        color: (1, 1, 1, 1)
+                        border_radius: [20,]                
+                        border: (2,2,2,2)
+                        on_press: root.stop_time()
+
+                    Button:
+                        id: reset
+                        text: 'Reset'
+                        size_hint: (0.5, 0.2)   # This sets the button's size to half the width and 20% of the height of the parent widget
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        font_size: 20
+                        background_normal: ''
+                        background_color: (0, 0.6, 0.6, 1)
+                        color: (1, 1, 1, 1)
+                        border_radius: [20,]
+                        border: (2,2,2,2)
+                        on_press: root.reset()
+
+                BoxLayout:
+                    orientation: "vertical"              
+                    Label:
+                        id: stopwatch
+                        font_name: "Comfortaa/Comfortaa_Thin.ttf"
+                        halign: 'center'
+                        valign: 'center'                
+                        text:'00:00:00'
+                        font_size: 40
+
+                    Button:
+                        id: show_details_button
+                        text: 'Show Details'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        font_size: 20
+                        background_normal: ''
+                        background_color: (0, 0.6, 0.6, 1)
+                        color: (1, 1, 1, 1)
+                        border_radius: [20,]
+                        border: (2,2,2,2)
+                        disabled: True
+                        on_press: root.show_details()
+        Screen:
+            name: "details_window"
+            size: root.width, root.height
+            
+            BoxLayout:
+                orientation:"vertical"
+                BoxLayout:
+                    id: box
+                    size_hint_y: .8
+                    pos_hint: {"top":1}
+
+                       
+ 
+                BoxLayout:
+                    orientation:"horizontal"
+                    Button:
+                        id: backImage
+                        size_hint: .04,.10                       
+                        background_color: 0,0,0,0
+                        pos_hint: {'center_y': 0.1}
+                        on_press: root.start_app()
+                        Image:
+                            source: 'back_button.png'
+                            center_y: self.parent.center_y
+                    GridLayout:
+                        id: table
+                        size_hint: 0.9,1
+                        cols: 2
+                        padding: 5
+                        spacing: 5
+
+
+
+<Button>:
+    font_name: "Comfortaa/Comfortaa_Regular.ttf"
+
+#     canvas:
+#         Color:
+#             rgba: 82, 204, 200, 0.8
+#         RoundedRectangle:
+#             size: self.size
+#             pos: self.pos
+#             radius: [6, 6, 6, 6]
+#     background_normal: ''
+#     background_color: '(82, 204, 200, 0.8)'
+
+# <CustomButton>:
+#     background_normal: ''
+#     background_color: self.custom_background_color
+#     color: self.custom_text_color

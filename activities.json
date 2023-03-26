@@ -1,0 +1,30 @@
+{
+    "activities": [
+        {
+            "name": "ScreenTime",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "end_time": "2023-03-26 05:52:01",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 3,
+                    "start_time": "2023-03-26 05:51:58"
+                }
+            ]
+        },
+        {
+            "name": "Visual Studio Code",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "end_time": "2023-03-26 05:52:02",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 1,
+                    "start_time": "2023-03-26 05:52:01"
+                }
+            ]
+        }
+    ]
+}
