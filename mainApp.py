@@ -17,15 +17,7 @@ import threading
 import json
 import signal
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
-# from kivy.factory import Factory
-# from kivy.uix.floatlayout import FloatLayout
 
-# # define the custom FlowLayout class
-# class FlowLayout(FloatLayout):
-#     pass
-
-# register the class with Kivy's Factory
-# Factory.register('FlowLayout', cls=FlowLayout)
 
 Window.size = (1000,600)
 
@@ -42,18 +34,8 @@ class Interface(BoxLayout):
         self.start_time()
    
     def start_app(self):       
-        self.ids.sm.current = 'timetrack_window'
-        
-        table = self.ids.table
-
-        with open("my_data.csv", "r") as f:
-            # iterate over each row in csv
-            for row in f:
-                # split the row by comma delimiter
-                columns = row.split(",")
-                # create a label for each column
-                for column in columns:
-                    table.add_widget(Label(text=column.strip()))
+        self.ids.sm.current = 'timetrack_window'       
+        self.update_csv()
 
         Clock.schedule_interval(self.update_time, 0)
         # self.output_display() 
@@ -61,11 +43,11 @@ class Interface(BoxLayout):
     def show_details(self):
         self.ids.sm.current = "details_window"
         self.plot_detail()
+        
         global detail
         detail = subprocess.Popen(['python', 'csv_store.py'])
         detail.wait()
         detail.send_signal(signal.SIGTERM)
-
         table = self.ids.table
 
         with open("my_data.csv", "r") as f:
@@ -77,7 +59,13 @@ class Interface(BoxLayout):
                 for column in columns:
                     table.add_widget(Label(text=column.strip()))
 
+        # self.table_csv()
 
+    # def table_csv(self):
+        
+    def update_csv(self):    
+        
+        return
 
     def plot_detail(self):
         box = self.ids.box
@@ -114,6 +102,8 @@ class Interface(BoxLayout):
         # subprocess.terminate()
         process.send_signal(signal.SIGTERM)
         self.ids.sm.current = 'timetrack_window'
+
+        self.update_csv()
 
         self.ids.show_details_button.disabled = False
         
